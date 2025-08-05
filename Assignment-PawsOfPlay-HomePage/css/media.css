@@ -1,0 +1,75 @@
+
+@media (max-width: 992px) {
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-content,
+    .footer-links {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .shop-controls,
+    .form-row,
+    .contact-content,
+    .about-content,
+    .blog-content,
+    .footer-content,
+    .footer-links,
+    .footer-bottom-content,
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 250px);
+    }
+
+    .blog-image img {
+        width: 100%;
+        height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    .tab-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .search-box input {
+        font-size: 0.9rem;
+    }
+
+    .team-member img {
+        height: 220px;
+    }
+}
