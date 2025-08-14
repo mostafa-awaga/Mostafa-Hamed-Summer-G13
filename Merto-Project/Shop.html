@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merto — Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="preconnect" href="https://images.unsplash.com"/>
+    <link rel="preconnect" href="https://picsum.photos"/>
+    <style>
+        /* Page-local fallback in case global styles change */
+        .shop-card img { height: 180px; object-fit: cover; }
+        .breadcrumb { --bs-breadcrumb-divider: '›'; }
+    </style>
+    <meta name="description" content="Shop page with filters and pagination">
+</head>
+<body>
+
+    <!-- Main Navigation (same as Index) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-2 text-dark me-4" href="Index.html">M<span class="text-danger text-decoration-overline">e</span>rto</a>
+
+            <a href="tel:+923942787" class="text-decoration-none text-dark d-none d-lg-flex align-items-center me-4">
+                <i class="fa-solid fa-phone me-2 text-muted"></i>
+                <div>
+                    <small class="d-block text-muted">Contact us 24/7</small>
+                    <small class="fw-bold">(+92) 3942 7879</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="mx-lg-4 my-3 my-lg-0 flex-grow-1" style="max-width: 640px;">
+                    <form id="headerSearchForm" class="input-group" role="search">
+                        <select class="form-select bg-light border-0" style="max-width: 160px;" id="headerSearchCategory" name="category" aria-label="Select category">
+                            <option value="">All Categories</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="home">Home & Decor</option>
+                            <option value="beauty">Beauty</option>
+                        </select>
+                        <input class="form-control border-0" type="search" id="headerSearchInput" name="q" placeholder="Search for products..." aria-label="Search for products">
+                        <button class="btn btn-dark border-0 px-4" type="submit" aria-label="Search">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-dark d-flex align-items-center">
+                            <i class="fa-regular fa-user me-1"></i>
+                            <span class="d-none d-lg-inline">Account</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-dark position-relative d-flex align-items-center">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="d-none d-lg-inline ms-1"></span>
+                            <span id="wishlistCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-dark position-relative d-flex align-items-center">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="d-none d-lg-inline ms-1"></span>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop breadcrumb/header -->
+    <div class="container py-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-2">
+                <li class="breadcrumb-item"><a href="Index.html" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Shop</li>
+            </ol>
+        </nav>
+        <h2 class="mb-0">Shop</h2>
+        <!-- Category pills bar moved under the Shop heading -->
+        <div class="shop-cat-bar mt-3" id="shopCatBar">
+            <button class="shop-cat-pill active" data-cat="all">Autopart</button>
+            <button class="shop-cat-pill" data-cat="beauty">Beauty & Health</button>
+            <button class="shop-cat-pill" data-cat="electronic">Electronic</button>
+            <button class="shop-cat-pill" data-cat="fashion">Fashion</button>
+            <button class="shop-cat-pill" data-cat="games">Game Accessories</button>
+            <button class="shop-cat-pill" data-cat="home">Home & Decor</button>
+            <button class="shop-cat-pill" data-cat="laptop">Laptop & Computer</button>
+            <button class="shop-cat-pill" data-cat="phone">Phone & Tablet</button>
+            <button class="shop-cat-pill" data-cat="tv">TV, Audio - Video</button>
+        </div>
+    </div>
+
+    <!-- Shop App -->
+    <section class="py-2" id="shopApp">
+        <div class="container">
+            <div class="row g-3">
+                <!-- Sidebar Filters -->
+                <aside class="col-lg-3">
+                    <div class="shop-sidebar position-sticky" style="top: 80px;">
+                        <!-- Colors -->
+                        <div class="filter-card p-3 mb-3 border rounded-3 bg-white">
+                            <h6 class="mb-2">Colors</h6>
+                            <ul class="color-filter list-unstyled m-0" id="filterColors"><!-- populated by JS --></ul>
+                        </div>
+                        <!-- Brands -->
+                        <div class="filter-card p-3 mb-3 border rounded-3 bg-white">
+                            <h6 class="mb-2">Brands</h6>
+                            <div class="d-grid gap-2" id="filterBrands"></div>
+                        </div>
+                        <!-- Price -->
+                        <div class="filter-card p-3 mb-3 border rounded-3 bg-white">
+                            <h6 class="mb-2">Price</h6>
+                            <div class="d-flex align-items-center gap-2">
+                                <input type="number" class="form-control form-control-sm" id="priceMin" placeholder="Min" min="0">
+                                <span class="text-muted">—</span>
+                                <input type="number" class="form-control form-control-sm" id="priceMax" placeholder="Max" min="0">
+                            </div>
+                        </div>
+                        <!-- Size -->
+                        <div class="filter-card p-3 mb-3 border rounded-3 bg-white">
+                            <h6 class="mb-2">Size</h6>
+                            <div class="d-grid gap-2" id="filterSizes"></div>
+                        </div>
+                        <!-- Storage Capacity -->
+                        <div class="filter-card p-3 mb-3 border rounded-3 bg-white">
+                            <h6 class="mb-2">Storage Capacity</h6>
+                            <div class="d-grid gap-2" id="filterStorage"></div>
+                        </div>
+                        <!-- Customer Rating -->
+                        <div class="filter-card p-3 mb-3 border rounded-3 bg-white">
+                            <h6 class="mb-2">Customer Rating</h6>
+                            <div class="d-grid gap-1" id="filterRatings"></div>
+                        </div>
+
+                        <button class="btn btn-dark w-100" id="applyFiltersBtn">Apply filters</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2" id="clearFiltersBtn">Clear</button>
+                    </div>
+                </aside>
+
+                <!-- Products area -->
+                <div class="col-lg-9">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                        <div class="small text-muted" id="shopSummary">Showing 0 results</div>
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="small text-muted">Show:</label>
+                            <select id="perPageSelect" class="form-select form-select-sm" style="width: auto;">
+                                <option value="28" selected>28</option>
+                                <option value="56">56</option>
+                                <option value="84">84</option>
+                            </select>
+                            <label class="small text-muted ms-2">Sort:</label>
+                            <select id="sortSelect" class="form-select form-select-sm" style="width: auto;">
+                                <option value="latest" selected>Sort by latest</option>
+                                <option value="price_asc">Price: Low to High</option>
+                                <option value="price_desc">Price: High to Low</option>
+                                <option value="rating_desc">Rating</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row g-3" id="shopGrid" data-static="false">
+                        <!-- Static products (28 items) -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=1" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-1.jpg" class="shop-image" alt="Product 1">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Nike • Black • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 1 Name</h6>
+                                        <div class="fw-bold">$129</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=2" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-2.jpg" class="shop-image" alt="Product 2">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Apple • Blue • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 2 Name</h6>
+                                        <div class="fw-bold">$899</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=3" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-3.jpg" class="shop-image" alt="Product 3">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Sony • Gray • ★★★★★</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 3 Name</h6>
+                                        <div class="fw-bold">$499</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=4" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-4.jpg" class="shop-image" alt="Product 4">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Adidas • Green • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 4 Name</h6>
+                                        <div class="fw-bold">$159</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=5" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-1.jpg" class="shop-image" alt="Product 5">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Zara • Pink • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 5 Name</h6>
+                                        <div class="fw-bold">$79</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=6" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-2.jpg" class="shop-image" alt="Product 6">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Canon • Orange • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 6 Name</h6>
+                                        <div class="fw-bold">$349</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=7" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-3.jpg" class="shop-image" alt="Product 7">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Samsung • Purple • ★★★★★</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 7 Name</h6>
+                                        <div class="fw-bold">$699</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=8" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-4.jpg" class="shop-image" alt="Product 8">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Nike • Navy • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 8 Name</h6>
+                                        <div class="fw-bold">$199</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 9 - 16 -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=9" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-1.jpg" class="shop-image" alt="Product 9">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Apple • Black • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 9 Name</h6>
+                                        <div class="fw-bold">$899</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=10" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-2.jpg" class="shop-image" alt="Product 10">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Sony • Blue • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 10 Name</h6>
+                                        <div class="fw-bold">$549</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=11" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-3.jpg" class="shop-image" alt="Product 11">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Canon • Gray • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 11 Name</h6>
+                                        <div class="fw-bold">$399</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=12" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-4.jpg" class="shop-image" alt="Product 12">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Adidas • Green • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 12 Name</h6>
+                                        <div class="fw-bold">$179</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=13" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-1.jpg" class="shop-image" alt="Product 13">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Zara • Pink • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 13 Name</h6>
+                                        <div class="fw-bold">$89</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=14" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-2.jpg" class="shop-image" alt="Product 14">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Samsung • Navy • ★★★★★</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 14 Name</h6>
+                                        <div class="fw-bold">$649</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=15" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-3.jpg" class="shop-image" alt="Product 15">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Nike • Gray • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 15 Name</h6>
+                                        <div class="fw-bold">$129</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=16" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-4.jpg" class="shop-image" alt="Product 16">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Apple • Green • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 16 Name</h6>
+                                        <div class="fw-bold">$999</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 17 - 24 -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=17" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-1.jpg" class="shop-image" alt="Product 17">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Sony • Black • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 17 Name</h6>
+                                        <div class="fw-bold">$459</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=18" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-2.jpg" class="shop-image" alt="Product 18">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Canon • Blue • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 18 Name</h6>
+                                        <div class="fw-bold">$379</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=19" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-3.jpg" class="shop-image" alt="Product 19">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Adidas • Gray • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 19 Name</h6>
+                                        <div class="fw-bold">$169</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=20" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-4.jpg" class="shop-image" alt="Product 20">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Zara • Green • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 20 Name</h6>
+                                        <div class="fw-bold">$99</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=21" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-1.jpg" class="shop-image" alt="Product 21">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Samsung • Pink • ★★★★★</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 21 Name</h6>
+                                        <div class="fw-bold">$799</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=22" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-2.jpg" class="shop-image" alt="Product 22">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Nike • Orange • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 22 Name</h6>
+                                        <div class="fw-bold">$139</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=23" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-3.jpg" class="shop-image" alt="Product 23">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Apple • Purple • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 23 Name</h6>
+                                        <div class="fw-bold">$1099</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=24" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-4.jpg" class="shop-image" alt="Product 24">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Sony • Green • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 24 Name</h6>
+                                        <div class="fw-bold">$579</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- 25 - 28 -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=25" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-1.jpg" class="shop-image" alt="Product 25">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Canon • Black • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 25 Name</h6>
+                                        <div class="fw-bold">$329</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=26" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-2.jpg" class="shop-image" alt="Product 26">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Adidas • Blue • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 26 Name</h6>
+                                        <div class="fw-bold">$149</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=27" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-3.jpg" class="shop-image" alt="Product 27">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Zara • Gray • ★★★☆☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 27 Name</h6>
+                                        <div class="fw-bold">$99</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <a href="ProductDetails.html?id=28" class="card-link">
+                                <div class="card h-100 shop-card">
+                                    <div class="shop-image-container">
+                                        <img src="Img/fashion-4.jpg" class="shop-image" alt="Product 28">
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small text-muted">Samsung • Green • ★★★★☆</div>
+                                        <h6 class="card-title mt-1 mb-2">Product 28 Name</h6>
+                                        <div class="fw-bold">$739</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <nav class="mt-4" aria-label="Shop pagination">
+                        <ul class="pagination justify-content-center" id="shopPagination"></ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as Index) -->
+    <footer class="footer-dark pt-5">
+        <div class="container-fluid px-0">
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-4">
+                    <a class="navbar-brand fw-bold fs-3 text-white" href="#">M<span class="text-danger text-decoration-overline">e</span>rto</a>
+                    <ul class="list-unstyled mt-3 mb-4 footer-contact">
+                        <li><i class="fa-solid fa-location-dot me-2"></i>29 SE 2nd Ave, Miami<br>Florida 33131, United States</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i>info@example.com</li>
+                        <li><i class="fa-solid fa-phone me-2"></i>(+92) 3942 7879</li>
+                    </ul>
+                    <div class="footer-social d-flex align-items-center gap-2">
+                        <a href="#" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="row g-4">
+                        <div class="col-4">
+                            <h6 class="footer-title">SHOPPING</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Wishlist</a></li>
+                                <li><a class="footer-link" href="#">Shop by Brand</a></li>
+                                <li><a class="footer-link" href="#">Offers</a></li>
+                                <li><a class="footer-link" href="#">Track order</a></li>
+                                <li><a class="footer-link" href="#">Size Guide</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="footer-title">INFORMATION</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Track Order</a></li>
+                                <li><a class="footer-link" href="#">Shipping & Returns</a></li>
+                                <li><a class="footer-link" href="#">About us</a></li>
+                                <li><a class="footer-link" href="#">Help</a></li>
+                                <li><a class="footer-link" href="#">Gift Cards</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="footer-title">ACCOUNT</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Cart</a></li>
+                                <li><a class="footer-link" href="#">My account</a></li>
+                                <li><a class="footer-link" href="#">My orders</a></li>
+                                <li><a class="footer-link" href="#">Wishlist</a></li>
+                                <li><a class="footer-link" href="#">Affiliate Program</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h6 class="footer-title">Let’s keep in touch</h6>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control footer-input" placeholder="enter your email address" aria-label="email">
+                        <button class="btn btn-light" type="button"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 footer-social-sm">
+                        <a href="#" aria-label="social"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-info-cards row g-3 mt-4">
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-solid fa-phone fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">Didn’t find what you were looking for?</div>
+                            <a href="#" class="footer-link">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-regular fa-face-smile fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">How can we help you today?</div>
+                            <a href="#" class="footer-link">Help Center</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-solid fa-comment-dots fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">We’d love to hear what you think!</div>
+                            <a href="#" class="footer-link">Give Feedback</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap mt-4 pt-3">
+                <div class="small">Copyright © <span id="yearNow"></span>. All Rights Reserved</div>
+                <div class="d-flex align-items-center gap-2 footer-payments">
+                    <i class="fab fa-cc-paypal fa-2x"></i>
+                    <i class="fab fa-cc-visa fa-2x"></i>
+                    <i class="fab fa-cc-mastercard fa-2x"></i>
+                    <i class="fab fa-cc-amex fa-2x"></i>
+                    <i class="fab fa-cc-discover fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Script.js" defer></script>
+</body>
+</html>
+
+

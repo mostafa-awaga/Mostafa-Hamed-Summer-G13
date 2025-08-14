@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Navbar with Secondary Navigation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/Style.css">
+</head>
+<body>
+
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+        <div class="container">
+            
+            <!-- Brand Logo -->
+            <a class="navbar-brand fw-bold fs-2 text-dark me-4" href="#">
+                M<span class="text-danger text-decoration-overline">e</span>rto
+            </a>
+            
+            <!-- Phone Contact (Desktop) -->
+            <a href="tel:+923942787" class="text-decoration-none text-dark d-none d-lg-flex align-items-center me-4">
+                <i class="fa-solid fa-phone me-2 text-muted"></i>
+                <div>
+                    <small class="d-block text-muted">Contact us 24/7</small>
+                    <small class="fw-bold">(+92) 3942 7879</small>
+                </div>
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                
+                <!-- Phone Contact (Mobile) -->
+                <a href="tel:+923942787" class="text-decoration-none text-dark d-lg-none d-flex align-items-center mb-3">
+                    <i class="fa-solid fa-phone me-2 text-muted"></i>
+                    <div>
+                        <small class="d-block text-muted">Contact us 24/7</small>
+                        <small class="fw-bold">(+92) 3942 7879</small>
+                    </div>
+                </a>
+                
+                <div class="mx-lg-4 my-3 my-lg-0 flex-grow-1" style="max-width: 640px;">
+                    <form id="headerSearchForm" class="input-group" role="search">
+                        <select class="form-select bg-light border-0" style="max-width: 160px;" id="headerSearchCategory" name="category" aria-label="Select category">
+                            <option value="">All Categories</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="home">Home & Decor</option>
+                            <option value="beauty">Beauty</option>
+                            </select>
+                        <input class="form-control border-0" type="search" id="headerSearchInput" name="q" placeholder="Search for products..." aria-label="Search for products">
+                        <button class="btn btn-dark border-0 px-4" type="submit" aria-label="Search">
+                                <i class="fa fa-search"></i>
+                            </button>
+                    </form>
+                </div>
+
+                <!-- Right Side Navigation -->
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    
+                    <!-- Language Selector -->
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://flagcdn.com/w20/us.png" alt="English" class="me-2" style="width: 20px;">
+                            English
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <img src="https://flagcdn.com/w20/us.png" alt="English" class="me-2" style="width: 20px;">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <img src="https://flagcdn.com/w20/sa.png" alt="Arabic" class="me-2" style="width: 20px;">
+                                    العربية
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Currency Selector -->
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            USD
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow">
+                            <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
+                            <li><a class="dropdown-item" href="#">EUR - Euro</a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <!-- Account -->
+                    <li class="nav-item me-2">
+                        <a href="#" class="nav-link text-dark d-flex align-items-center">
+                            <i class="fa-regular fa-user me-1"></i>
+                            <span class="d-none d-lg-inline">Account</span>
+                        </a>
+                    </li>
+
+                    <!-- Wishlist -->
+                    <li class="nav-item me-2">
+                        <a href="#" class="nav-link text-dark position-relative d-flex align-items-center">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="d-none d-lg-inline ms-1"></span>
+                            <span id="wishlistCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
+                        </a>
+                    </li>
+
+                    <!--  Cart -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-dark position-relative d-flex align-items-center">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="d-none d-lg-inline ms-1"></span>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- ------------------------------------------------------------------ -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-top py-1 small">
+    <div class="container">
+
+        <div class="dropdown me-3 position-static">
+            <button class="btn btn-outline-dark btn-sm d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bars me-2"></i>
+                SHOP BY CATEGORIES
+            </button>
+            <div class="dropdown-menu w-100 mt-0 p-3 mega-menu">
+                <div class="row g-4">
+                    <div class="col-6 col-md-3">
+                        <h6 class="text-uppercase small fw-bold mb-3">Fashion</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li><a class="dropdown-item" href="#">Women</a></li>
+                            <li><a class="dropdown-item" href="#">Men</a></li>
+                            <li><a class="dropdown-item" href="#">Shoes</a></li>
+                            <li><a class="dropdown-item" href="#">Accessories</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h6 class="text-uppercase small fw-bold mb-3">Electronics</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li><a class="dropdown-item" href="#">Smartphone</a></li>
+                            <li><a class="dropdown-item" href="#">Laptop & Computer</a></li>
+                            <li><a class="dropdown-item" href="#">Camera & Photo</a></li>
+                            <li><a class="dropdown-item" href="#">TV, Audio - Video</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h6 class="text-uppercase small fw-bold mb-3">Home & Decor</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li><a class="dropdown-item" href="#">Furniture</a></li>
+                            <li><a class="dropdown-item" href="#">Lighting</a></li>
+                            <li><a class="dropdown-item" href="#">Mirrors & Clocks</a></li>
+                            <li><a class="dropdown-item" href="#">Wall Decor</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h6 class="text-uppercase small fw-bold mb-3">Beauty & Health</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li><a class="dropdown-item" href="#">Makeup</a></li>
+                            <li><a class="dropdown-item" href="#">Skincare</a></li>
+                            <li><a class="dropdown-item" href="#">Hair Care</a></li>
+                            <li><a class="dropdown-item" href="#">Brushes & Tools</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler border-0 d-lg-none btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#secondaryNavContent" aria-controls="secondaryNavContent" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="secondaryNavContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link dropdown-toggle fw-semibold px-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Homepages
+                    </a>
+                    <ul class="dropdown-menu mega-menu">
+                        <li><a class="dropdown-item" href="#">Supermarket 01</a></li>
+                        <li><a class="dropdown-item" href="#">Supermarket 02</a></li>
+                        <li><a class="dropdown-item" href="#">Autopart</a></li>
+                        <li><a class="dropdown-item" href="#">Furniture</a></li>
+                        <li><a class="dropdown-item" href="#">Cosmetics</a></li>
+                        <li><a class="dropdown-item" href="#">Electronic</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link dropdown-toggle text-dark px-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu mega-menu">
+                        <li><a class="dropdown-item" href="#">Top Categories - Style 1</a></li>
+                        <li><a class="dropdown-item" href="#">Top Categories - Style 2</a></li>
+                        <li><a class="dropdown-item" href="#">Top Brand</a></li>
+                        <li><a class="dropdown-item" href="#">List Layout</a></li>
+                        <li><a class="dropdown-item" href="#">Collapse Scroll Sidebar</a></li>
+                        <li><a class="dropdown-item" href="#">Filter Sidebar</a></li>
+                        <li><a class="dropdown-item" href="#">Top Banner</a></li>
+                        <li><a class="dropdown-item" href="#">Bottom Banner</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link dropdown-toggle text-dark px-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Products
+                    </a>
+                    <ul class="dropdown-menu mega-menu">
+                        <li><a class="dropdown-item" href="#">Simple product</a></li>
+                        <li><a class="dropdown-item" href="#">Variable - Label Attribute</a></li>
+                        <li><a class="dropdown-item" href="#">Variable - Dropdown Attribute</a></li>
+                        <li><a class="dropdown-item" href="#">Variable - Color Swatch</a></li>
+                        <li><a class="dropdown-item" href="#">Variable - Variation Thumbnail</a></li>
+                        <li><a class="dropdown-item" href="#">Group product</a></li>
+                        <li><a class="dropdown-item" href="#">External product</a></li>
+                        <li><a class="dropdown-item" href="#">Vertical thumbnail</a></li>
+                        <li><a class="dropdown-item" href="#">Horizontal thumbnail</a></li>
+                        <li><a class="dropdown-item" href="#">Summary scrolling</a></li>
+                        <li><a class="dropdown-item" href="#">Flash sale</a></li>
+                        <li><a class="dropdown-item" href="#">Video + 360 degree</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item me-2">
+                    <a class="nav-link text-dark px-2 fw-semibold" href="Contact.html">Contact Us</a>
+                </li>
+
+                <li class="nav-item me-2">
+                    <a class="nav-link text-dark px-2" href="#">About us</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link text-dark px-2" href="#">Blog</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link text-dark px-2 d-flex align-items-center" href="#">
+                        <i class="fa-solid fa-tag me-1 text-warning"></i>
+                        Best Discount
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark px-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Recently viewed
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end small" style="min-width: 320px;" id="recentlyViewedMenu">
+                        <li class="px-3 py-2 text-muted">No items yet</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+   <div class="container-fluid">
+        <div class="row g-0 d-flex">
+            <div class="col-lg-8" >
+                <div id="mainCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="3000" >
+                    <div class="carousel-inner h-100" >
+                        <!-- Slide 1 -->
+                        <div class="carousel-item active h-100">
+                            <div class="card text-white bg-teal p-5 rounded-0 border-0 h-100 d-flex justify-content-center hero-card">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <p class="mb-2">Limited time offer *</p>
+                                        <h1 class="display-6 fw-bold mb-3">From Italia Sale 25% off Armchairs!</h1>
+                                        <a href="#" class="btn btn-light mt-1">SHOP NOW</a>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <img src="/Img/furniture-20.png" class="img-fluid hero-image" alt="Armchair">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="carousel-item h-100">
+                            <div class="card text-white bg-teal p-5 rounded-0 border-0 h-100 d-flex justify-content-center hero-card">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <p class="mb-2">Fresh Arrivals</p>
+                                        <h1 class="display-6 fw-bold mb-3">New Season Essentials</h1>
+                                        <a href="#" class="btn btn-light mt-1">SHOP NOW</a>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <img src="Img/fashion-16.png" class="img-fluid hero-image" alt="Fashion">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="carousel-item h-100">
+                            <div class="card text-white bg-teal p-5 rounded-0 border-0 h-100 d-flex justify-content-center hero-card">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <p class="mb-2">Trending Now</p>
+                                        <h1 class="display-6 fw-bold mb-3">Upgrade Your Space</h1>
+                                        <a href="#" class="btn btn-light mt-1">SHOP NOW</a>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <img src="Img/MakeUp.png" class="img-fluid hero-image" alt="MakeUp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Cards -->
+            <!-- Add d-flex and flex-column to stack cards vertically -->
+            <div class="col-lg-4 d-flex flex-column">
+                <!-- Add flex-fill to make cards take equal height -->
+                <div class="card small-card flex-fill rounded-0 border-0 overflow-hidden pop-card">
+                    <div class="row g-0 h-100">
+                        <div class="col-6 p-4 d-flex flex-column justify-content-center">
+                            <p class="text-muted mb-1">BLACK FRIDAY</p>
+                            <h4 class="fw-bold">Big Sale Eyeshadow</h4>
+                            <p class="text-muted small">Over +100 items</p>
+                            <a href="#" class="btn btn-outline-dark mt-2">SHOP NOW</a>
+                        </div>
+                        <div class="col-6">
+                            <img src="/Img/MakeUp.png" class="img-fluid h-100" alt="Eyeshadow">
+                        </div>
+                    </div>
+                </div>
+                <div class="card small-card1 flex-fill rounded-0 border-0 overflow-hidden pop-card">
+                     <div class="row g-0 h-100">
+                        <div class="col-6 p-4 d-flex flex-column justify-content-center">
+                            <p class="text-muted mb-1">NEW COLLECTION</p>
+                            <h4 class="fw-bold">Puffer Jacket 30% off</h4>
+                            <p class="text-muted small">Best jacket in year</p>
+                            <a href="#" class="btn btn-outline-dark mt-2">SHOP NOW</a>
+                        </div>
+                        <div class="col-6 position-relative">
+                            <img src="Img/fashion-16.png" class="img-fluid h-100" alt="Puffer Jacket">
+                            <span class="price-tag">$29</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-4">
+  <div class="row text-center">
+
+
+    <!-- Fast, Free Shipping -->
+    <div class="col-md-3 d-flex align-items-center justify-content-center border-end">
+      <i class="fa-solid fa-truck-fast fa-2x text-secondary me-4"></i>
+      <div class="text-start">
+        <strong>Fast, Free Shipping</strong><br>
+        <small class="text-muted">On order over $50</small>
+      </div>
+    </div>
+
+    <!-- Next Day Delivery -->
+    <div class="col-md-3 d-flex align-items-center justify-content-center border-end">
+      <i class="fa-regular fa-clock fa-2x text-secondary me-4"></i>
+      <div class="text-start">
+        <strong>Next Day Delivery</strong><br>
+        <small class="text-muted">Free – spend over $99</small>
+      </div>
+    </div>
+
+    <!-- Low Price Guarantee -->
+    <div class="col-md-3 d-flex align-items-center justify-content-center border-end">
+      <i class="fa-regular fa-star fa-2x text-secondary me-4"></i>
+      <div class="text-start">
+        <strong>Low Price Guarantee</strong><br>
+        <small class="text-muted">We offer competitive prices</small>
+      </div>
+    </div>
+
+    <!-- Quality Guarantee -->
+    <div class="col-md-3 d-flex align-items-center justify-content-center">
+      <i class="fa-regular fa-thumbs-up fa-2x text-secondary me-4"></i>
+      <div class="text-start">
+        <strong>Quality Guarantee</strong><br>
+        <small class="text-muted">We Guarantee Our Products</small>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container my-5">
+    <div class="row justify-content-center g-4">
+
+        <div class="col-auto category-item g-">
+            <div class="circle">
+                <img src="/Img/599194134.png" alt="Smartphone">
+            </div>
+            <p>Smartphone</p>
+        </div>
+
+        <div class="col-auto category-item">
+            <div class="circle">
+                <img src="/Img/599194134.png" alt="Home & Decor">
+            </div>
+            <p>Home & Decor</p>
+        </div>
+
+        <div class="col-auto category-item">
+            <div class="circle">
+                <img src="/Img/599194134.png" alt="Makeup">
+            </div>
+            <p>Makeup</p>
+        </div>
+
+        <div class="col-auto category-item active">
+            <div class="circle">
+                <img src="/Img/599194134.png" alt="Autopart">
+            </div>
+            <p>Autopart</p>
+        </div>
+
+        <div class="col-auto category-item">
+            <div class="circle">
+                <img src="/Img/599194134.png" alt="Laptop & Computer">
+            </div>
+            <p>Laptop & Computer</p>
+        </div>
+
+        <div class="container my-4">
+    <div class="coupon-banner">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="coupon-inline small text-muted">
+                        Super discount for your <strong>first purchase</strong>
+                        <span class="highlight">COUPON25</span>
+                        <span class="ms-1">Use discount code in the checkout!</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-dark" onclick="copyCoupon()">
+                        <i class="fa-solid fa-copy me-1"></i>Copy
+                    </button>
+                </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid py-4">
+        <!-- Flash Deals Section -->
+        <section class="flash-deals">
+            <div class="container">
+                <!-- Header -->
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-6">
+                        <h2 class="flash-deals-title mb-0">Flash Deals</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="countdown-timer d-flex align-items-center">
+                            <span class="me-2">Ends in</span>
+                            <div class="timer-box"><span class="timer-number" id="timer-days">00</span></div>
+                            <span class="timer-separator">:</span>
+                            <div class="timer-box"><span class="timer-number" id="timer-hours">00</span></div>
+                            <span class="timer-separator">:</span>
+                            <div class="timer-box"><span class="timer-number" id="timer-mins">00</span></div>
+                            <span class="timer-separator">:</span>
+                            <div class="timer-box"><span class="timer-number" id="timer-secs">00</span></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-end">
+                        <a href="Shop.html" class="see-all-link">See All Products</a>
+                    </div>
+                </div>
+
+                <!-- Products Carousel -->
+                <div class="position-relative">
+                    <!-- Navigation Arrows -->
+                    <button class="carousel-nav prev-btn" onclick="slideProducts('prev')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav next-btn" onclick="slideProducts('next')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Products Container -->
+                    <div class="products-container" id="productsContainer">
+                        <div class="row g-1 flex-nowrap" id="productsRow">
+                            <!-- Product 1 -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-35%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Laptop Asus Vivobook" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Laptop Asus Vivobook i5 1355U, 8GB RAM, 512GB SSD</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$999</span>
+                                            <span class="original-price">$1536</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 2 -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-5%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Apple Watch" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Apple Watch Series 9 GPS 45mm, Aluminum Case with Sport Band</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$890</span>
+                                            <span class="original-price">$950</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 3 -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-8%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Hydraulic Trolley" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">TOOLS 34 Low Profile Hydraulic Trolley</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$767</span>
+                                            <span class="original-price">$837</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 4 -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-33%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Wall Clock" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">14-inch Fasion Simplicity Quality Wall Clock, Home Decor</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$50</span>
+                                            <span class="original-price">$75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 5 (duplicate for slider) -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-20%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Face Powder" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Translucent Compact Face Powder - 03 Medium, 0.22 oz</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$9</span>
+                                            <span class="original-price">$14</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 6 (duplicate for slider) -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-17%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Lipstick" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Allure Luminous Intense Lipstick 0.15oz</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$20</span>
+                                            <span class="original-price">$24</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 7 (duplicate for slider) -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-10%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="T-Shirt" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Tonga on T-Shirt for Men, Women Short Sleeve Tee</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$43</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product 8 (duplicate for slider) -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-37%</span>
+                                        <div class="product-actions">
+                                            <button class="action-btn wishlist-btn">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="action-btn compare-btn">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                            <button class="action-btn view-btn">
+                                                <i class="far fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn cart-btn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="side-icon compare-btn" title="Compare">
+                                                <i class="fas fa-random"></i>
+                                            </button>
+                                            <button class="side-icon view-btn" title="Quick View">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="side-icon cart-btn" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="quick-view-overlay">
+                                            <button class="quick-view-btn">Quick View</button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Makeup Brushes" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Makeup Brushes Artisan Easel Elite Cosmetics</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="current-price">$19</span>
+                                            <span class="original-price">$30</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quickViewTitle">Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <img id="quickViewImage" src="/Img/599194134.png" class="img-fluid rounded" alt="product">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="current-price h4 mb-0" id="quickViewPrice">$0</span>
+                                <span class="original-price" id="quickViewOriginal"></span>
+                            </div>
+                            <p class="text-muted small" id="quickViewDesc">High quality product description.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-dark" id="quickViewAddCart"><i class="fa-solid fa-cart-plus me-1"></i>Add to cart</button>
+                                <button class="btn btn-outline-secondary" id="quickViewAddWish"><i class="fa-regular fa-heart me-1"></i>Wishlist</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+        <div id="liveToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastBody">Action completed.</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Promotional Banners Section -->
+    <section class="promo-banners-section">
+        <div class="container">
+            
+            <div class="promo-grid">
+                <!-- Left Side Card - Tires Sale -->
+                <div class="promo-card promo-card-1">
+                    <div class="promo-image-container">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Car Tires" class="promo-image" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Middle Card - Furniture (Wider) -->
+                <div class="promo-card promo-card-2">
+                    <div class="promo-image-container">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Modern Sofa" class="promo-image" loading="lazy">
+                    </div>
+
+                </div>
+
+                <!-- Right Side Card - Beauty Products -->
+                <div class="promo-card promo-card-3">
+                    <div class="promo-image-container">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Beauty Products" class="promo-image" loading="lazy">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- ----------------------------------------------------------- -->
+
+
+     <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>New Arrivals</h2>
+                <p>Discover our latest collection of premium products</p>
+            </div>
+            
+            <div class="row">
+                <!-- Product Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <!-- Left Half - Image -->
+                        <div class="product-image-container">
+                            <span class="product-badge">Hot</span>
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nike Air Max Sneaker" class="product-image">
+                        </div>
+                        
+                        <!-- Right Half - Product Details -->
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h3 class="product-title">Nike Air Max Unisex SYSTM Men Sneaker Shoes</h3>
+                                <div class="product-price">$148</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Icon Bar -->
+                        <div class="icon-bar">
+                            <!-- Add to Cart - 2/3 width -->
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                            
+                            <!-- Icons - 1/3 width -->
+                            <div class="icons-container">
+                                <div class="icon-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="icon-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <div class="icon-btn" title="Compare">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <!-- Left Half - Image -->
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="UV Protected Sunglasses" class="product-image">
+                        </div>
+                        
+                        <!-- Right Half - Product Details -->
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h3 class="product-title">100% UV Protected Sunglasses For Men</h3>
+                                <div class="product-price">$123</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Icon Bar -->
+                        <div class="icon-bar">
+                            <!-- Add to Cart - 2/3 width -->
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                            
+                            <!-- Icons - 1/3 width -->
+                            <div class="icons-container">
+                                <div class="icon-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="icon-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <div class="icon-btn" title="Compare">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <!-- Left Half - Image -->
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1583743814966-8936f37f4678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Denim Mini Skirt" class="product-image">
+                        </div>
+                        
+                        <!-- Right Half - Product Details -->
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h3 class="product-title">LV Women Leather Accent Denim Mini Skirt</h3>
+                                <div class="product-price">$1,390</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Icon Bar -->
+                        <div class="icon-bar">
+                            <!-- Add to Cart - 2/3 width -->
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                            
+                            <!-- Icons - 1/3 width -->
+                            <div class="icons-container">
+                                <div class="icon-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="icon-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <div class="icon-btn" title="Compare">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <!-- Left Half - Image -->
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Christmas Knit Sweater" class="product-image">
+                        </div>
+                        
+                        <!-- Right Half - Product Details -->
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h3 class="product-title">A Different Christmas Knit Holiday Sweater</h3>
+                                <div class="product-price">$50 - $65</div>
+                                <div class="product-rating">
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Icon Bar -->
+                        <div class="icon-bar">
+                            <!-- Add to Cart - 2/3 width -->
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                            
+                            <!-- Icons - 1/3 width -->
+                            <div class="icons-container">
+                                <div class="icon-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="icon-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <div class="icon-btn" title="Compare">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <!-- Left Half - Image -->
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Retro American Campus Jacket" class="product-image">
+                        </div>
+                        
+                        <!-- Right Half - Product Details -->
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h3 class="product-title">Winter New Jacket Loose Retro American Campus</h3>
+                                <div class="product-price">$160</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Icon Bar -->
+                        <div class="icon-bar">
+                            <!-- Add to Cart - 2/3 width -->
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                            
+                            <!-- Icons - 1/3 width -->
+                            <div class="icons-container">
+                                <div class="icon-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="icon-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <div class="icon-btn" title="Compare">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <!-- Left Half - Image -->
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Winter Hat" class="product-image">
+                        </div>
+                        
+                        <!-- Right Half - Product Details -->
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h3 class="product-title">Winter Hats with Top Ball Custom Design</h3>
+                                <div class="product-price">$17</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Icon Bar -->
+                        <div class="icon-bar">
+                            <!-- Add to Cart - 2/3 width -->
+                            <button class="add-to-cart-btn">
+                                <i class="fas fa-plus"></i>
+                                Add to Cart
+                            </button>
+                            
+                            <!-- Icons - 1/3 width -->
+                            <div class="icons-container">
+                                <div class="icon-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="icon-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <div class="icon-btn" title="Compare">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+<!-- --------------------------------------------- -->
+
+    <!-- New Arrivals Highlight with Variants -->
+    <section class="py-5" id="naHighlight">
+        <div class="container-fluid px-0">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="na-card d-lg-flex align-items-stretch p-4 p-lg-5">
+                        <!-- Media -->
+                        <div class="na-media flex-grow-1 me-lg-4 mb-4 mb-lg-0">
+                            <span class="na-badge">-30%</span>
+                            <img id="naMainImage" class="w-100 h-100" src="Img/fashion-4.jpg" alt="Highlight Product">
+                        </div>
+                        <!-- Details -->
+                        <div class="na-details flex-grow-1">
+                            <h3 class="mb-3">Athletics Embroidered Relaxed Hoodie</h3>
+                            <ul class="list-unstyled text-muted mb-4 small">
+                                <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i>64% cotton, 36% polyester</li>
+                                <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i>Do not dry clean</li>
+                                <li><i class="fa-solid fa-check text-success me-2"></i>Machine wash</li>
+                            </ul>
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="fs-3 fw-bold">$89</div>
+                                <div class="text-muted text-decoration-line-through">$120</div>
+                            </div>
+                            <!-- Variant thumbnails -->
+                            <div class="na-variants d-flex align-items-center gap-3 mb-4" id="naVariants">
+                                <button type="button" class="na-variant active" data-img="Img/fashion-4.jpg">
+                                    <img src="Img/fashion-4.jpg" alt="Variant 1">
+                                </button>
+                                <button type="button" class="na-variant" data-img="Img/fashion-3.jpg">
+                                    <img src="Img/fashion-3.jpg" alt="Variant 2">
+                                </button>
+                                <button type="button" class="na-variant" data-img="Img/fashion-2.jpg">
+                                    <img src="Img/fashion-2.jpg" alt="Variant 3">
+                                </button>
+                                <button type="button" class="na-variant" data-img="Img/fashion-1.jpg">
+                                    <img src="Img/fashion-1.jpg" alt="Variant 4">
+                                </button>
+                            </div>
+                            <button class="btn btn-dark px-4 py-2">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --------------------------------------------- -->
+
+    <!-- Flash Deals (duplicate) under New Arrivals Highlight -->
+    <div class="container-fluid py-4">
+        <section class="flash-deals">
+            <div class="container">
+                <!-- Header -->
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-6">
+                        <h2 class="flash-deals-title mb-0">Flash Deals</h2>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <a href="Shop.html" class="see-all-link">See All Products</a>
+                    </div>
+                </div>
+
+                <!-- Products Carousel -->
+                <div class="position-relative">
+                    <!-- Navigation Arrows -->
+                    <button class="carousel-nav prev-btn" onclick="slideProducts2('prev')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav next-btn" onclick="slideProducts2('next')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Products Container -->
+                    <div class="products-container" id="productsContainer2">
+                        <div class="row g-1 flex-nowrap" id="productsRow2">
+                            <!-- Product A -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-20%</span>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Item" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Compact Face Powder - Medium 0.22 oz</h6>
+                                        <div class="product-price">
+                                            <span class="current-price">$9</span>
+                                            <span class="original-price">$14</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product B -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-17%</span>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Item" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Allure Luminous Intense Lipstick 0.15oz</h6>
+                                        <div class="product-price">
+                                            <span class="current-price">$20</span>
+                                            <span class="original-price">$24</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product C -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-10%</span>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Item" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Tonga on T-Shirt Short Sleeve Tee</h6>
+                                        <div class="product-price">
+                                            <span class="current-price">$43</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product D -->
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="product-card">
+                                    <div class="product-image-container">
+                                        <span class="discount-badge">-37%</span>
+                                        <div class="side-icons">
+                                            <button class="side-icon wishlist-btn" title="Wishlist"><i class="far fa-heart"></i></button>
+                                            <button class="side-icon compare-btn" title="Compare"><i class="fas fa-random"></i></button>
+                                            <button class="side-icon view-btn" title="Quick View"><i class="fas fa-search"></i></button>
+                                            <button class="side-icon cart-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                                        </div>
+                                        <img src="/Img/599194134.png" alt="Item" class="product-image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">Makeup Brushes Artisan Elite</h6>
+                                        <div class="product-price">
+                                            <span class="current-price">$19</span>
+                                            <span class="original-price">$30</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+
+    <!-- From Our Blog -->
+    <div class="container my-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="mb-0">From Our Blog</h3>
+                    <a href="#" class="see-all-link">Read All</a>
+                </div>
+                
+        <div class="row g-4">
+                            <div class="col-md-4">
+                    <div class="blog-card h-100">
+                        <div class="blog-image">
+                            <img src="/Img/599194134.png" alt="blog">
+                        </div>
+                        <div class="blog-content">
+                            <div class="text-muted small mb-2">Beauty & Fashion</div>
+                            <h5 class="mb-2">Weekday Outfit Inspiration for All Occasions</h5>
+                            <p class="text-muted mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta et nisi at sodales.</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <a href="#" class="read-more-btn">Read more</a>
+                                <small class="text-muted">By Myoui Mina</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            <div class="col-md-4">
+                    <div class="blog-card h-100">
+                        <div class="blog-image">
+                            <img src="/Img/599194134.png" alt="blog">
+                        </div>
+                        <div class="blog-content">
+                            <div class="text-muted small mb-2">Electronics</div>
+                            <h5 class="mb-2">How to Choose the Right Laptop for Your Needs</h5>
+                            <p class="text-muted mb-3">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <a href="#" class="read-more-btn">Read more</a>
+                                <small class="text-muted">By Tech Expert</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            <div class="col-md-4">
+                    <div class="blog-card h-100">
+                        <div class="blog-image">
+                            <img src="/Img/599194134.png" alt="blog">
+                        </div>
+                        <div class="blog-content">
+                            <div class="text-muted small mb-2">Home & Decor</div>
+                            <h5 class="mb-2">Styling Your Living Room Like a Pro</h5>
+                            <p class="text-muted mb-3">Integer eget leo feugiat, volutpat lacus a, ullamcorper ipsum. Nulla facilisi.</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <a href="#" class="read-more-btn">Read more</a>
+                                <small class="text-muted">By Interior Designer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+    <!-- Newsletter -->
+    <section class="search-band py-5">
+        <div class="container text-center">
+            <h3 class="mb-4 fw-semibold">Looking for something else?</h3>
+            <div class="d-flex justify-content-center mb-3">
+                <div class="search-wrap w-100" style="max-width: 760px;">
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control search-input" placeholder="Search for products..." aria-label="Search">
+                        <button class="btn btn-dark search-btn" type="button" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                </div>
+            </div>
+            <div class="tag-list small text-muted d-flex flex-wrap justify-content-center gap-2">
+                <a href="#" class="tag">smartphone</a>
+                <a href="#" class="tag">tablet</a>
+                <a href="#" class="tag">controller</a>
+                <a href="#" class="tag">furniture</a>
+                <a href="#" class="tag">laptop</a>
+                <a href="#" class="tag">playstation</a>
+                <a href="#" class="tag">womens fashion</a>
+                <a href="#" class="tag">home & decor</a>
+                <a href="#" class="tag">camera</a>
+        </div>
+    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-dark pt-5">
+        <div class="container-fluid px-0">
+            <div class="row g-4 align-items-start">
+                <!-- Left: Logo + contact -->
+                <div class="col-lg-4">
+                    <a class="navbar-brand fw-bold fs-3 text-white" href="#">M<span class="text-danger text-decoration-overline">e</span>rto</a>
+                    <ul class="list-unstyled mt-3 mb-4 footer-contact">
+                        <li><i class="fa-solid fa-location-dot me-2"></i>29 SE 2nd Ave, Miami<br>Florida 33131, United States</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i>info@example.com</li>
+                        <li><i class="fa-solid fa-phone me-2"></i>(+92) 3942 7879</li>
+                    </ul>
+                    <div class="footer-social d-flex align-items-center gap-2">
+                        <a href="#" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                        </div>
+
+                <!-- Middle: 3 columns -->
+                <div class="col-lg-5">
+                    <div class="row g-4">
+                        <div class="col-4">
+                            <h6 class="footer-title">SHOPPING</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Wishlist</a></li>
+                                <li><a class="footer-link" href="#">Shop by Brand</a></li>
+                                <li><a class="footer-link" href="#">Offers</a></li>
+                                <li><a class="footer-link" href="#">Track order</a></li>
+                                <li><a class="footer-link" href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                        <div class="col-4">
+                            <h6 class="footer-title">INFORMATION</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Track Order</a></li>
+                                <li><a class="footer-link" href="#">Shipping & Returns</a></li>
+                                <li><a class="footer-link" href="#">About us</a></li>
+                                <li><a class="footer-link" href="#">Help</a></li>
+                                <li><a class="footer-link" href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                        <div class="col-4">
+                            <h6 class="footer-title">ACCOUNT</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Cart</a></li>
+                                <li><a class="footer-link" href="#">My account</a></li>
+                                <li><a class="footer-link" href="#">My orders</a></li>
+                                <li><a class="footer-link" href="#">Wishlist</a></li>
+                                <li><a class="footer-link" href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+            </div>
+                </div>
+
+                <!-- Right: Subscribe -->
+                <div class="col-lg-3">
+                    <h6 class="footer-title">Let’s keep in touch</h6>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control footer-input" placeholder="enter your email address" aria-label="email">
+                        <button class="btn btn-light" type="button"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 footer-social-sm">
+                        <a href="#" aria-label="social"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info cards row -->
+            <div class="footer-info-cards row g-3 mt-4">
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-solid fa-phone fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">Didn’t find what you were looking for?</div>
+                            <a href="#" class="footer-link">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-regular fa-face-smile fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">How can we help you today?</div>
+                            <a href="#" class="footer-link">Help Center</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-solid fa-comment-dots fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">We’d love to hear what you think!</div>
+                            <a href="#" class="footer-link">Give Feedback</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap mt-4 pt-3">
+                <div class="small">Copyright © <span id="yearNow"></span>. All Rights Reserved</div>
+                <div class="d-flex align-items-center gap-2 footer-payments">
+                    <i class="fab fa-cc-paypal fa-2x"></i>
+                    <i class="fab fa-cc-visa fa-2x"></i>
+                    <i class="fab fa-cc-mastercard fa-2x"></i>
+                    <i class="fab fa-cc-amex fa-2x"></i>
+                    <i class="fab fa-cc-discover fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back To Top -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Script.js" defer></script>
+
+</body>
+</html>

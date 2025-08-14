@@ -1,32 +1,67 @@
-var usersList = [
-    { id: 2, firstName: "Mostafa", lastName: "Hamed", balance: 2000 },
-    { id: 1, firstName: "Ahmed", lastName: "Awaga", balance: 1000 },
-    { id: 4, firstName: "Mohamed", lastName: "Lotfy", balance: 3000 },
-    { id: 3, firstName: "Saleh", lastName: "Mahmoud", balance: 1500 }
-];
-
-usersList.forEach(user => {
-    console.log(user);
-});
+// var usersList = [
+//     { id: 2, firstName: "Mostafa", lastName: "Hamed", balance: 2000 },
+//     { id: 1, firstName: "Ahmed", lastName: "Awaga", balance: 1000 },
+//     { id: 4, firstName: "Mohamed", lastName: "Lotfy", balance: 3000 },
+//     { id: 3, firstName: "Saleh", lastName: "Mahmoud", balance: 1500 }
+// ];
 
 
-function editUserBalanceById(id, newBalance) {
-    var userIndex = usersList.findIndex(user => user.id === id);
-    if (userIndex !== -1) {
-        usersList[userIndex].balance = newBalance;
-    } else {
-        console.log("User not found");
+
+
+
+var loginForm = document.getElementById("loginForm");
+var users = []
+var addUser = (name, email) => {
+    var user = {
+         name,
+         email
     }
+    users.push(user);
+    console.log(users);
 }
+loginForm.addEventListener("submit", (e) => 
+{
+    e.preventDefault();
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    addUser(name, email);
+    loginForm.reset();
+}
+) 
 
-function deleteUserById(id) {
-    var userIndex = usersList.findIndex(user => user.id === id);
-    if (userIndex !== -1) {
-        usersList.splice(userIndex, 1);
-    } else {
-        console.log("User not found");
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+// usersList.forEach(user => {
+//     console.log(user);
+// });
+
+
+// function editUserBalanceById(id, newBalance) {
+//     var userIndex = usersList.findIndex(user => user.id === id);
+//     if (userIndex !== -1) {
+//         usersList[userIndex].balance = newBalance;
+//     } else {
+//         console.log("User not found");
+//     }
+// }
+
+// function deleteUserById(id) {
+//     var userIndex = usersList.findIndex(user => user.id === id);
+//     if (userIndex !== -1) {
+//         usersList.splice(userIndex, 1);
+//     } else {
+//         console.log("User not found");
+//     }
+// }
 
 
 

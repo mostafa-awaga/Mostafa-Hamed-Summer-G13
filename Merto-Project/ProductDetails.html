@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="css/ProductDetails.css">
+</head>
+<body>
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+        <div class="container">
+            
+            <!-- Brand Logo -->
+            <a class="navbar-brand fw-bold fs-2 text-dark me-4" href="#">
+                M<span class="text-danger text-decoration-overline">e</span>rto
+            </a>
+            
+            <!-- Phone Contact (Desktop) -->
+            <a href="tel:+923942787" class="text-decoration-none text-dark d-none d-lg-flex align-items-center me-4">
+                <i class="fa-solid fa-phone me-2 text-muted"></i>
+                <div>
+                    <small class="d-block text-muted">Contact us 24/7</small>
+                    <small class="fw-bold">(+92) 3942 7879</small>
+                </div>
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                
+                <!-- Phone Contact (Mobile) -->
+                <a href="tel:+923942787" class="text-decoration-none text-dark d-lg-none d-flex align-items-center mb-3">
+                    <i class="fa-solid fa-phone me-2 text-muted"></i>
+                    <div>
+                        <small class="d-block text-muted">Contact us 24/7</small>
+                        <small class="fw-bold">(+92) 3942 7879</small>
+                    </div>
+                </a>
+                
+                <div class="mx-lg-4 my-3 my-lg-0 flex-grow-1" style="max-width: 640px;">
+                    <form id="headerSearchForm" class="input-group" role="search">
+                        <select class="form-select bg-light border-0" style="max-width: 160px;" id="headerSearchCategory" name="category" aria-label="Select category">
+                            <option value="">All Categories</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="home">Home & Decor</option>
+                            <option value="beauty">Beauty</option>
+                            </select>
+                        <input class="form-control border-0" type="search" id="headerSearchInput" name="q" placeholder="Search for products..." aria-label="Search for products">
+                        <button class="btn btn-dark border-0 px-4" type="submit" aria-label="Search">
+                                <i class="fa fa-search"></i>
+                            </button>
+                    </form>
+                </div>
+
+                <!-- Right Side Navigation -->
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    
+                    <!-- Language Selector -->
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://flagcdn.com/w20/us.png" alt="English" class="me-2" style="width: 20px;">
+                            English
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <img src="https://flagcdn.com/w20/us.png" alt="English" class="me-2" style="width: 20px;">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <img src="https://flagcdn.com/w20/sa.png" alt="Arabic" class="me-2" style="width: 20px;">
+                                    العربية
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Currency Selector -->
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            USD
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow">
+                            <li><a class="dropdown-item" href="#">USD - US Dollar</a></li>
+                            <li><a class="dropdown-item" href="#">EUR - Euro</a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <!-- Account -->
+                    <li class="nav-item me-2">
+                        <a href="#" class="nav-link text-dark d-flex align-items-center">
+                            <i class="fa-regular fa-user me-1"></i>
+                            <span class="d-none d-lg-inline">Account</span>
+                        </a>
+                    </li>
+
+                    <!-- Wishlist -->
+                    <li class="nav-item me-2">
+                        <a href="#" class="nav-link text-dark position-relative d-flex align-items-center">
+                            <i class="fa-regular fa-heart"></i>
+                            <span class="d-none d-lg-inline ms-1"></span>
+                            <span id="wishlistCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
+                        </a>
+                    </li>
+
+                    <!--  Cart -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-dark position-relative d-flex align-items-center">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="d-none d-lg-inline ms-1"></span>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="Index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="Shop.html">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page" id="productBreadcrumb">Product</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Product Details Section -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Product Images -->
+            <div class="col-lg-6">
+                <div class="row">
+                    <!-- Thumbnail Images -->
+                    <div class="col-lg-2 col-md-2 col-3">
+                        <div class="product-thumbnails d-flex flex-lg-column flex-md-column flex-row gap-2">
+                            <img src="/Img/fashion-1.jpg" alt="Product" class="thumbnail-image img-fluid" data-main="/Img/fashion-1.jpg">
+                            <img src="/Img/fashion-2.jpg" alt="Product" class="thumbnail-image img-fluid" data-main="/Img/fashion-2.jpg">
+                            <img src="/Img/fashion-3.jpg" alt="Product" class="thumbnail-image img-fluid" data-main="/Img/fashion-3.jpg">
+                            <img src="/Img/fashion-4.jpg" alt="Product" class="thumbnail-image img-fluid" data-main="/Img/fashion-4.jpg">
+                        </div>
+                    </div>
+                    
+                    <!-- Main Image -->
+                    <div class="col-lg-10 col-md-10 col-9">
+                        <div class="main-image-container position-relative">
+                            <div class="product-badge-hot position-absolute">HOT</div>
+                            <button class="zoom-btn position-absolute" title="Zoom">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                            <img id="mainProductImage" src="/Img/fashion-1.jpg" alt="Nike Air Max" class="main-product-image img-fluid w-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Information -->
+            <div class="col-lg-6">
+                <div class="product-info">
+                    <!-- Brand -->
+                    <div class="product-brand mb-2">
+                        <span class="text-muted" id="productBrand">Nike</span>
+                    </div>
+                    
+                    <!-- Title -->
+                    <h1 class="product-title mb-3" id="productTitle">Nike Air Max Unisex SYSTM Men Sneaker Shoes</h1>
+                    
+                    <!-- Rating -->
+                    <div class="product-rating mb-3 d-flex align-items-center">
+                        <div class="stars me-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-score me-2">4.50</span>
+                        <span class="rating-count text-muted">(4 Reviews)</span>
+                        <a href="#" class="write-review-link ms-2">Write a review</a>
+                    </div>
+                    
+                    <!-- Features -->
+                    <div class="product-features mb-3">
+                        <div class="feature-item d-flex align-items-center mb-1">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <span>Machine Wash</span>
+                        </div>
+                        <div class="feature-item d-flex align-items-center mb-1">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <span>Lace-Up</span>
+                        </div>
+                        <div class="feature-item d-flex align-items-center mb-1">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <span>14.1 Ounces</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="product-price mb-3">
+                        <span class="current-price fs-2 fw-bold" id="productPrice">$148</span>
+                    </div>
+                    
+                    <!-- Stock Status -->
+                    <div class="stock-status mb-3">
+                        <span class="badge bg-success">In stock</span>
+                    </div>
+                    
+                    <!-- Quantity and Actions -->
+                    <div class="product-actions-main mb-4">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <!-- Quantity -->
+                            <div class="quantity-selector d-flex align-items-center">
+                                <button class="btn btn-outline-secondary quantity-btn" data-action="decrease">-</button>
+                                <input type="number" class="form-control quantity-input text-center" value="1" min="1" style="width: 70px;">
+                                <button class="btn btn-outline-secondary quantity-btn" data-action="increase">+</button>
+                            </div>
+                            
+                            <!-- Add to Cart -->
+                            <button class="btn btn-dark px-4 add-to-cart-btn flex-grow-1">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                + ADD TO CART
+                            </button>
+                        </div>
+                        
+                        <!-- Buy Now -->
+                        <button class="btn btn-danger w-100 buy-now-btn mb-3">
+                            BUY NOW
+                        </button>
+                    </div>
+                    
+                    <!-- Wishlist and Compare -->
+                    <div class="secondary-actions mb-4 d-flex align-items-center gap-3">
+                        <button class="btn btn-link text-decoration-none add-to-wishlist p-0">
+                            <i class="far fa-heart me-1"></i>
+                            Add to wishlist
+                        </button>
+                        <button class="btn btn-link text-decoration-none add-to-compare p-0">
+                            <i class="fas fa-balance-scale me-1"></i>
+                            Add to compare
+                        </button>
+                    </div>
+                    
+                    <!-- Separator -->
+                    <hr class="my-4">
+                    
+                    <!-- Product Meta -->
+                    <div class="product-meta mb-4">
+                        <div class="meta-item mb-2">
+                            <span class="fw-bold">SKU:</span>
+                            <span class="text-muted" id="productSKU">GWF6FJCTH</span>
+                        </div>
+                        <div class="meta-item mb-2">
+                            <span class="fw-bold">Categories:</span>
+                            <a href="#" class="text-decoration-none">Accessories</a>,
+                            <a href="#" class="text-decoration-none">Shoes</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Share -->
+                    <div class="product-share">
+                        <div class="d-flex align-items-center gap-2">
+                            <a href="#" class="social-share-btn" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="Pinterest">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-share-btn" title="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Tabs: Description, Specifications, Reviews -->
+    <div class="container my-5" id="productTabs">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab-desc" data-bs-toggle="tab" data-bs-target="#pane-desc" type="button" role="tab">Description</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-specs" data-bs-toggle="tab" data-bs-target="#pane-specs" type="button" role="tab">Specifications</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-reviews" data-bs-toggle="tab" data-bs-target="#pane-reviews" type="button" role="tab">Reviews</button>
+            </li>
+        </ul>
+        <div class="tab-content pt-3">
+            <!-- Description -->
+            <div class="tab-pane fade show active" id="pane-desc" role="tabpanel" aria-labelledby="tab-desc">
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <p>Compellingly grow performance based mindshare through parallel potentialities. Rapidiously underwhelm top-line catalysts for change before best-of-breed materials.</p>
+                        <p>Competently brand timely catalysts for change through sustainable systems. Completely expedite ubiquitous bandwidth after integrated action items.</p>
+                        <p>Progressively transform leading-edge supply chains whereas flexible niche markets.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-3 rounded-3 bg-light">
+                            <div class="row g-2 small">
+                                <div class="col-4 fw-semibold">Shipping</div>
+                                <div class="col-8">We currently offer free shipping worldwide on all orders over $100.</div>
+                                <div class="col-4 fw-semibold">Sizing</div>
+                                <div class="col-8">Fits true to size. Do you need size advice?</div>
+                                <div class="col-4 fw-semibold">Return & exchange</div>
+                                <div class="col-8">14 days for an exchange or refund.</div>
+                                <div class="col-4 fw-semibold">Assistance</div>
+                                <div class="col-8">Contact us on (+44) 555 88 65, or support@themesky.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Specifications -->
+            <div class="tab-pane fade" id="pane-specs" role="tabpanel" aria-labelledby="tab-specs">
+                <div class="table-responsive">
+                    <table class="table align-middle small mb-0">
+                        <tbody>
+                            <tr><th class="w-25">Fabric Type</th><td>50% Cotton, 48% Polyester, 2% Spandex</td></tr>
+                            <tr class="table-light"><th>Care Instructions</th><td>Hand Wash Only</td></tr>
+                            <tr><th>Returns</th><td>FREE Returns</td></tr>
+                            <tr class="table-light"><th>Season</th><td>Spring, summer and fall</td></tr>
+                            <tr><th>Dimensions</th><td>0.5 x 0.5 x 0.5 inches</td></tr>
+                            <tr class="table-light"><th>Item Weight</th><td>5.6 ounces</td></tr>
+                            <tr><th>Material</th><td>Varsity jacket made of polyester fabric, durable and breathable</td></tr>
+                            <tr class="table-light"><th>Multi-occasion</th><td>Unisex jackets, perfect for men and women</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Reviews -->
+            <div class="tab-pane fade" id="pane-reviews" role="tabpanel" aria-labelledby="tab-reviews">
+                <p class="text-muted small mb-0">No reviews yet. Be the first to write a review.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related products strip (Flash Deals style) -->
+    <div class="container-fluid py-4">
+        <section class="flash-deals">
+            <div class="container">
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-6">
+                        <h2 class="flash-deals-title mb-0">You may also like</h2>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <a href="Shop.html" class="see-all-link">See All Products</a>
+                    </div>
+                </div>
+
+                <div class="position-relative">
+                    <button class="carousel-nav prev-btn" onclick="slideProductsPD('prev')"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-nav next-btn" onclick="slideProductsPD('next')"><i class="fas fa-chevron-right"></i></button>
+
+                    <div class="products-container" id="productsContainerPD">
+                        <div class="row g-1 flex-nowrap" id="productsRowPD"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+ 
+
+    <!-- Footer -->
+    <footer class="footer-dark pt-5">
+        <div class="container-fluid px-0">
+            <div class="row g-4 align-items-start">
+                <!-- Left: Logo + contact -->
+                <div class="col-lg-4">
+                    <a class="navbar-brand fw-bold fs-3 text-white" href="#">M<span class="text-danger text-decoration-overline">e</span>rto</a>
+                    <ul class="list-unstyled mt-3 mb-4 footer-contact">
+                        <li><i class="fa-solid fa-location-dot me-2"></i>29 SE 2nd Ave, Miami<br>Florida 33131, United States</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i>info@example.com</li>
+                        <li><i class="fa-solid fa-phone me-2"></i>(+92) 3942 7879</li>
+                    </ul>
+                    <div class="footer-social d-flex align-items-center gap-2">
+                        <a href="#" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                        </div>
+
+                <!-- Middle: 3 columns -->
+                <div class="col-lg-5">
+                    <div class="row g-4">
+                        <div class="col-4">
+                            <h6 class="footer-title">SHOPPING</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Wishlist</a></li>
+                                <li><a class="footer-link" href="#">Shop by Brand</a></li>
+                                <li><a class="footer-link" href="#">Offers</a></li>
+                                <li><a class="footer-link" href="#">Track order</a></li>
+                                <li><a class="footer-link" href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                        <div class="col-4">
+                            <h6 class="footer-title">INFORMATION</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Track Order</a></li>
+                                <li><a class="footer-link" href="#">Shipping & Returns</a></li>
+                                <li><a class="footer-link" href="#">About us</a></li>
+                                <li><a class="footer-link" href="#">Help</a></li>
+                                <li><a class="footer-link" href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                        <div class="col-4">
+                            <h6 class="footer-title">ACCOUNT</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="footer-link" href="#">Cart</a></li>
+                                <li><a class="footer-link" href="#">My account</a></li>
+                                <li><a class="footer-link" href="#">My orders</a></li>
+                                <li><a class="footer-link" href="#">Wishlist</a></li>
+                                <li><a class="footer-link" href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+            </div>
+                </div>
+
+                <!-- Right: Subscribe -->
+                <div class="col-lg-3">
+                    <h6 class="footer-title">Let’s keep in touch</h6>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control footer-input" placeholder="enter your email address" aria-label="email">
+                        <button class="btn btn-light" type="button"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 footer-social-sm">
+                        <a href="#" aria-label="social"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="social"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info cards row -->
+            <div class="footer-info-cards row g-3 mt-4">
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-solid fa-phone fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">Didn’t find what you were looking for?</div>
+                            <a href="#" class="footer-link">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-regular fa-face-smile fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">How can we help you today?</div>
+                            <a href="#" class="footer-link">Help Center</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-card d-flex align-items-center p-3">
+                        <i class="fa-solid fa-comment-dots fa-lg me-3"></i>
+                        <div>
+                            <div class="small text-muted">We’d love to hear what you think!</div>
+                            <a href="#" class="footer-link">Give Feedback</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap mt-4 pt-3">
+                <div class="small">Copyright © <span id="yearNow"></span>. All Rights Reserved</div>
+                <div class="d-flex align-items-center gap-2 footer-payments">
+                    <i class="fab fa-cc-paypal fa-2x"></i>
+                    <i class="fab fa-cc-visa fa-2x"></i>
+                    <i class="fab fa-cc-mastercard fa-2x"></i>
+                    <i class="fab fa-cc-amex fa-2x"></i>
+                    <i class="fab fa-cc-discover fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Script.js"></script>
+</body>
+</html>
